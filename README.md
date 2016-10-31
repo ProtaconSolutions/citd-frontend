@@ -58,8 +58,8 @@ ng e2e
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ## Authors
-[Protacon Solutions](http://www.protacon.com)
-[Tarmo Leppänen](https://github.com/tarlepp)
+ * [Protacon Solutions](http://www.protacon.com)
+ * [Tarmo Leppänen](https://github.com/tarlepp)
 
 ## License
 [The MIT License (MIT)](LICENSE)
