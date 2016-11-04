@@ -12,7 +12,7 @@ import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 
 export class EditorComponent implements OnInit {
   public control: FormControl = new FormControl();
-  public timeLeft: number;
+  public timeLeft: number = 0;
   private code$: Observable<any>;
 
   constructor(
