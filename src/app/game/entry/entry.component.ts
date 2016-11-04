@@ -17,6 +17,20 @@ export class EntryComponent {
     private channelService: ChannelService
   ) { }
 
+  public ngOnInit() {
+    this.channelService.start();
+
+    this.channelService.sub('nicks').subscribe(
+      (event: ChannelEvent) => {
+        if (event.Name == 'login') {
+          this.storage.store('guid', event.Data);
+
+          this.router.navigate(['game/editor']);
+        }
+      }
+    );
+  }
+
   public entry() {
     this.storage.store('nick', this.nick);
 
@@ -30,7 +44,5 @@ export class EntryComponent {
 
     this.channelService.start();
     this.channelService.publish(event);
-
-    this.router.navigate(['game/editor']);
   }
 }
