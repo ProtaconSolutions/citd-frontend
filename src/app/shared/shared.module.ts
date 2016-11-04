@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { Ng2Webstorage } from 'ng2-webstorage';
@@ -9,9 +9,12 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 import { ChannelService } from './services/';
 import { ChannelModule } from './services/channel/channel.module';
 import { TaskService } from "./services/task/task.service";
+import { Directives } from './directives/';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ...Directives,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -35,6 +38,7 @@ import { TaskService } from "./services/task/task.service";
     RouterModule,
     ChannelModule,
     Ng2Webstorage,
+    ...Directives,
   ],
 })
 
