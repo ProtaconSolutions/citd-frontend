@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ExampleModule } from './example/example.module';
+import { EditorModule } from './editor/editor.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ExampleModule } from './example/example.module';
     AppRoutingModule,
     SharedModule,
     ExampleModule,
+    EditorModule,
   ],
   bootstrap: [
     AppComponent,

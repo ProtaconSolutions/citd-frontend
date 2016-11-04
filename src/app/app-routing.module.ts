@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ExampleRoutes } from './example/';
+import { EditorRoutes } from "./editor/";
 
 const appRoutes = [
   {
@@ -10,6 +11,7 @@ const appRoutes = [
     redirectTo: 'example',
   },
   ...ExampleRoutes,
+  ...EditorRoutes,
 ];
 
 @NgModule({
