@@ -1,6 +1,11 @@
-<h1>time left: {{timeLeft}}s</h1>
+<div *ngIf="!playerReady">
+    <button (click)="playerReady()">I'm playerReady!</button>
+</div>
 
-<textarea #code [formControl]="control"></textarea>
+<div *ngIf="playerReady">
+    <h1>time left: {{timeLeft}}s</h1>
 
-<hr>
+    <textarea #code [formControl]="control"></textarea>
 
+    <hr>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { LocalStorageService } from 'ng2-webstorage';
 
 import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 
@@ -13,10 +14,12 @@ import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 export class EditorComponent implements OnInit {
   public control: FormControl = new FormControl();
   public timeLeft: number = 0;
+  public playerReady: boolean = false;
   private code$: Observable<any>;
 
   constructor(
-    private channelService: ChannelService
+    private channelService: ChannelService,
+    private storage: LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -31,7 +34,10 @@ export class EditorComponent implements OnInit {
       .do(input => {
         let event = new ChannelEvent();
 
-        event.Data = input;
+        event.Data = {
+          guid: this.storage.retrieve('guid'),
+          input: input,
+        };
         event.Name = 'code';
         event.ChannelName = 'code';
 
@@ -39,5 +45,15 @@ export class EditorComponent implements OnInit {
       });
 
     this.code$.subscribe();
+  }
+
+  public ready() {
+    let event = new ChannelEvent();
+
+    event.Data = this.storage.retrieve('guid');
+    event.Name = 'playerReady';
+    event.ChannelName = 'nicks';
+
+    this.channelService.publish(event);
   }
 }
