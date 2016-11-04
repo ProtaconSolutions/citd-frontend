@@ -35,4 +35,22 @@ export class ResultTaskComponent implements OnInit {
       this.task = <ITask> channel.Data;
     })
   }
+
+  getStatusText(status : GameStatus) : string {
+    let statusText = 'Ei saatavilla';
+
+    switch(status){
+      case GameStatus.Done:
+        statusText = 'Valmis';
+        break;
+      case GameStatus.InProgress:
+        statusText = 'Kesken';
+        break;
+      case GameStatus.NotReady:
+        statusText = 'Odottaa';
+        break;
+    }
+
+    return statusText;
+  }
 }

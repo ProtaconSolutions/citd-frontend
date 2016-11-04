@@ -1,17 +1,27 @@
-<div>
+<div class="content-container">
   <h1>{{task.name}}</h1>
 
-  <ul>
-    <li *ngFor="let player of task.players">
-      <div>
-        <h3>{{player.name}}</h3>
-        <ul>
-          <li *ngFor="let test of player.tests">
-            {{test.result}}
-            {{test.failedText}}
-          </li>
-        </ul>
-      </div>
-    </li>
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Pelaaja</th>
+        <th>Status</th>
+        <th>Testitulokset</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of task.players">
+        <td>{{player.name}}</td>
+        <td [ngClass]="'status-' + player.status">{{getStatusText(player.status)}}</td>
+        <td>
+          <ul>
+            <li *ngFor="let test of player.tests" class="left-float">
+              <div class="test-result" [ngClass]="'result-' + test.result"></div>
+            </li>
+            <div class="float-fix"></div>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

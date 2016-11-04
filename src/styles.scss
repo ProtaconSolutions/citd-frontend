@@ -46,19 +46,17 @@ table {
 // End of CSS reset shit, had to do this because the prime ng documentation was down
 body {
   color: #FFFFFF;
-  background: #050505;
+  background: #5E5E5E;
 }
 
 
 header {
-  background: #00102b;
+  background: #333333;
   min-height: 100px;
   width: 100%;
-  border-bottom: 3px solid #003870; //#0077ff;
   padding-top: 25px;
   padding-bottom: 25px;
   padding-left: 15px;
-  margin-bottom: 25px;
   font-family: "Open Sans";
 
   h1 {
@@ -72,6 +70,14 @@ header {
   float: left;
 }
 
+.right-float {
+  float: right;
+}
+
 .float-fix {
   clear: both;
+}
+
+#cotd-logo {
+  max-height: 80px;
 }
