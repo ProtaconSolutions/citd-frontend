@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'ng2-webstorage';
 import { Router } from '@angular/router';
+import { ChannelEvent, ChannelService } from '../../shared/services/channel/';
 
 @Component({
   selector: 'app-entry',
@@ -12,11 +13,23 @@ export class EntryComponent {
 
   constructor(
     private storage: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private channelService: ChannelService
   ) { }
 
   public entry() {
     this.storage.store('nick', this.nick);
+
+    let event = new ChannelEvent();
+
+    event.Name = 'nickEntry';
+    event.ChannelName = 'nicks';
+    event.Data = {
+      nick: this.nick
+    };
+
+    this.channelService.start();
+    this.channelService.publish(event);
 
     this.router.navigate(['game/editor']);
   }
