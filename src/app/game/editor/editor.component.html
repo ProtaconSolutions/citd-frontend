@@ -1,7 +1,12 @@
-<h1>time left: {{ timeLeft }}s</h1>
+<div appLayout="column" appFlex>
+  <h1>time left: {{ timeLeft }}s</h1>
 
-<textarea #code
-  [(ngModel)]="codeInput"
-  [formControl]="control"
-  [ngStyle]="{'opacity': opacity}"
-></textarea>
+  <form appFlex>
+    <!-- note that we need to set "rows" and "cols" otherwise this won't work... -->
+    <textarea pInputTextarea autoResize="autoResize" rows="15" cols="30" style="width: 100%;" placeholder="write your code here..."
+      [(ngModel)]="codeInput"
+      [formControl]="control"
+      [ngStyle]="{'opacity': opacity}"
+    ></textarea>
+  </form>
+</div>
