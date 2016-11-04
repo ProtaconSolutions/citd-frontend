@@ -1,3 +1,8 @@
 <p>
-  entry works!
+    <input type="text" pInputText [(ngModel)]="nick" />
+
+    <button
+        (click)="entry()"
+        [disabled]="!nick"
+    >Enter</button>
 </p>
