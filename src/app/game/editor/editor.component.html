@@ -1,3 +1,7 @@
 <h1>time left: {{ timeLeft }}s</h1>
 
-<textarea #code [(ngModel)]="codeInput" [formControl]="control"></textarea>
+<textarea #code
+  [(ngModel)]="codeInput"
+  [formControl]="control"
+  [ngStyle]="{'opacity': opacity}"
+></textarea>

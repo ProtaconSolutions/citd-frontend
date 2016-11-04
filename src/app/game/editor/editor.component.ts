@@ -18,7 +18,8 @@ export interface ITimeData {
 
 export class EditorComponent implements OnInit {
   public control: FormControl = new FormControl();
-  public timeLeft: any;
+  public timeLeft: number;
+  public opacity: number;
   public codeInput: string;
   private code$: Observable<any>;
 
@@ -71,5 +72,6 @@ export class EditorComponent implements OnInit {
 
   private handleTimeUpdate(data: ITimeData) {
     this.timeLeft = data.TimeLeft;
+    this.opacity = data.TimeLeft / data.Interval;
   }
 }
