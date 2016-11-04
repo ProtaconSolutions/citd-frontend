@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ExampleRoutes } from './example/';
-import { EditorRoutes } from "./editor/";
+import { GameRoutes } from "./game/";
 
 const appRoutes = [
   {
@@ -11,7 +11,7 @@ const appRoutes = [
     redirectTo: 'example',
   },
   ...ExampleRoutes,
-  ...EditorRoutes,
+  ...GameRoutes,
 ];
 
 @NgModule({
@@ -21,7 +21,7 @@ const appRoutes = [
   exports: [
     RouterModule,
   ],
-  providers: []
+  providers: [],
 })
 
 export class AppRoutingModule { }

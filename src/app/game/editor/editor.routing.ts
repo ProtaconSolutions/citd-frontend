@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 
-import {EditorComponent} from "./editor.component";
+import { EditorComponent } from './editor.component';
 
 export const EditorRoutes: Routes = [
   {
-    path: 'editor',
+    path: 'game/editor',
     component: EditorComponent,
-  }
+  },
 ];
