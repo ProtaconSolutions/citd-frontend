@@ -69,6 +69,11 @@ export class EditorComponent implements OnInit {
   }
 
   private handleTimeUpdate(data: ITimeData) {
+    // Reset player input when times is up...
+    if (data.TimeLeft === data.Interval) {
+      this.codeInput = '';
+    }
+
     this.timeLeft = data.TimeLeft;
     this.opacity = data.TimeLeft / data.Interval;
   }
