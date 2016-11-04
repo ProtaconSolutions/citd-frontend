@@ -56,7 +56,6 @@ header {
   width: 100%;
   padding-top: 25px;
   padding-bottom: 25px;
-  padding-left: 15px;
   font-family: "Open Sans";
 
   h1 {
@@ -64,6 +63,18 @@ header {
     font-size: 24px;
     text-transform: uppercase;
   }
+
+  .header-container {
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+
+h1 {
+  margin: 0 0 20px 0;
+  font-family: "Open Sans";
+  font-size: 24px;
+  text-transform: uppercase;
 }
 
 .left-float {
