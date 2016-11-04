@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+
 import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 
 @Component({
@@ -10,34 +11,31 @@ import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 })
 
 export class EditorComponent implements OnInit {
-  code$: Observable<any>;
-  control: FormControl = new FormControl();
-  userInput: string;
+  public control: FormControl = new FormControl();
+  public timeLeft: number;
+  private code$: Observable<any>;
 
-  constructor(private channel: ChannelService) { }
+  constructor(
+    private channelService: ChannelService
+  ) { }
 
   ngOnInit() {
-        this.channel.start();
+    this.channelService.start();
 
-    this.channel.sub("code").subscribe((e: ChannelEvent) => this.userInput = e.Data);
+    this.channelService.sub('time').subscribe(
+      (event: ChannelEvent) => this.timeLeft = event.Data
+    );
 
     this.code$ = this.control.valueChanges
-      .map((userInput) => {
-        console.log(userInput);
-
-        return userInput;
-      })
       .debounceTime(500)
       .do(input => {
-        let event: ChannelEvent = {
-          ChannelName: "code",
-          Data: input,
-          Json: '{"lol": 3}',
-          Name: "Typehere",
-          Timestamp: new Date()
-        };
+        let event = new ChannelEvent();
 
-        this.channel.publish(event);
+        event.Data = input;
+        event.Name = 'code';
+        event.ChannelName = 'code';
+
+        this.channelService.publish(event);
       });
 
     this.code$.subscribe();
