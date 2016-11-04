@@ -2,8 +2,8 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ChannelConfig } from './channel-config';
 
 let channelConfig = new ChannelConfig();
-channelConfig.url = 'http://localhost:5000/signalr';
-channelConfig.hubName = 'messages';
+channelConfig.url = "http://localhost:5000/signalr";
+channelConfig.hubName = "messaging";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
