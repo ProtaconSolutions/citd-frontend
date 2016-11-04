@@ -15,7 +15,10 @@ export class EditorComponent implements OnInit {
   public control: FormControl = new FormControl();
   public timeLeft: number = 0;
   public playerReady: boolean = false;
+  public gameOn: boolean = false;
   private code$: Observable<any>;
+  private players: Array<any>;
+
 
   constructor(
     private channelService: ChannelService,
@@ -27,6 +30,31 @@ export class EditorComponent implements OnInit {
 
     this.channelService.sub('time').subscribe(
       (event: ChannelEvent) => this.timeLeft = event.Data
+    );
+
+    this.channelService.sub('nicks').subscribe(
+      (event: ChannelEvent) => {
+        // New player
+        if (event.Name === 'nickEntry') {
+          this.players.push({
+            nick: event.Data.nick,
+            guid: event.Data.guid,
+            ready: false
+          });
+        }
+
+        if (event.Name === 'playerReady') {
+          this.players.map((player) => {
+            if (player.guid === event.Data.guid) {
+              player.ready = true;
+            }
+          });
+
+          if (this.players.filter((player) => player.ready).length === this.players.length) {
+            this.gameOn = true;
+          }
+        }
+      }
     );
 
     this.code$ = this.control.valueChanges

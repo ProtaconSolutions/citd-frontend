@@ -2,7 +2,7 @@
     <button (click)="playerReady()">I'm playerReady!</button>
 </div>
 
-<div *ngIf="playerReady">
+<div *ngIf="gameOn">
     <h1>time left: {{timeLeft}}s</h1>
 
     <textarea #code [formControl]="control"></textarea>
