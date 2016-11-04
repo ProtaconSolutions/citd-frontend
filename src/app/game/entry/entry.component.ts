@@ -42,7 +42,6 @@ export class EntryComponent {
       nick: this.nick
     };
 
-    this.channelService.start();
     this.channelService.publish(event);
   }
 }
