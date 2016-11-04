@@ -26,9 +26,7 @@ export class EditorComponent implements OnInit {
   constructor(
     private channelService: ChannelService,
     private storage: LocalStorageService
-  ) {
-    setInterval(() => { }, 1);
-  }
+  ) { }
 
   ngOnInit() {
     this.channelService.start();

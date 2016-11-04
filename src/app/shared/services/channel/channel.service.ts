@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, NgZone } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ConnectionState } from './connection-state.enum';
 import { ChannelConfig } from './channel-config';
@@ -47,7 +47,8 @@ export class ChannelService {
   private subjects = new Array<ChannelSubject>();
 
   constructor(
-    @Inject('channel.config') private channelConfig: ChannelConfig
+    @Inject('channel.config') private channelConfig: ChannelConfig,
+    private ngZone: NgZone
   ) {
     if ($ === undefined || $.hubConnection === undefined) {
       throw new Error('The variable \'$\' or the .hubConnection() function are not defined... please check the SignalR scripts have been loaded properly');
@@ -92,23 +93,25 @@ export class ChannelService {
     });
 
     this.hubProxy.on('onEvent', (channel: string, event: ChannelEvent) => {
-      // console.log(`onEvent - ${channel} channel`, ev);
+      this.ngZone.run(() => {
+        // console.log(`onEvent - ${channel} channel`, ev);
 
-      //noinspection TypeScriptUnresolvedFunction
-      /**
-       * This method acts like a broker for incoming messages. We
-       * check the internal array of subjects to see if one exists
-       * for the channel this came in on, and then emit the event
-       * on it. Otherwise we ignore the message.
-       */
-      let channelSub = this.subjects.find((x: ChannelSubject) => {
-        return x.channel === channel;
-      }) as ChannelSubject;
+        //noinspection TypeScriptUnresolvedFunction
+        /**
+         * This method acts like a broker for incoming messages. We
+         * check the internal array of subjects to see if one exists
+         * for the channel this came in on, and then emit the event
+         * on it. Otherwise we ignore the message.
+         */
+        let channelSub = this.subjects.find((x: ChannelSubject) => {
+          return x.channel === channel;
+        }) as ChannelSubject;
 
-      // If we found a subject then emit the event on it
-      if (channelSub !== undefined) {
-        return channelSub.subject.next(event);
-      }
+        // If we found a subject then emit the event on it
+        if (channelSub !== undefined) {
+          return channelSub.subject.next(event);
+        }
+      });
     });
   }
 
