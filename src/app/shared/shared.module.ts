@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { Ng2Webstorage } from 'ng2-webstorage';
@@ -16,6 +16,7 @@ import { TaskService } from "./services/task/task.service";
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule,
     ChannelModule.forRoot(),
@@ -29,6 +30,7 @@ import { TaskService } from "./services/task/task.service";
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule,
     ChannelModule,
