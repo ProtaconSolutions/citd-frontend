@@ -8,6 +8,7 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 
 import { ChannelService } from './services/';
 import { ChannelModule } from './services/channel/channel.module';
+import { TaskService } from "./services/task/task.service";
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { ChannelModule } from './services/channel/channel.module';
   ],
   providers: [
     ChannelService,
+    TaskService
   ],
   exports: [
     CommonModule,

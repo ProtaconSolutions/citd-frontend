@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ExampleModule } from './example/example.module';
 import { GameModule } from './game/game.module';
+import { ResultModule } from "./result/result.module";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { GameModule } from './game/game.module';
     SharedModule,
     ExampleModule,
     GameModule,
+    ResultModule
   ],
   bootstrap: [
     AppComponent,

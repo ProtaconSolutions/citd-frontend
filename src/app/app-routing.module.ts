@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { ExampleRoutes } from './example/';
 import { GameRoutes } from "./game/";
+import { ResultRoutes } from "./result/result.routing";
 
 const appRoutes = [
   {
@@ -12,6 +13,7 @@ const appRoutes = [
   },
   ...ExampleRoutes,
   ...GameRoutes,
+  ...ResultRoutes,
 ];
 
 @NgModule({

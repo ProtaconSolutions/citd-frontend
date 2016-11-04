@@ -94,6 +94,7 @@ export class ChannelService {
     this.hubProxy.on('onEvent', (channel: string, event: ChannelEvent) => {
       // console.log(`onEvent - ${channel} channel`, ev);
 
+      //noinspection TypeScriptUnresolvedFunction
       /**
        * This method acts like a broker for incoming messages. We
        * check the internal array of subjects to see if one exists
@@ -142,6 +143,7 @@ export class ChannelService {
    */
   sub(channel: string): Observable<ChannelEvent> {
     // Try to find an observable that we already created for the requested channel
+    //noinspection TypeScriptUnresolvedFunction
     let channelSub = this.subjects.find((x: ChannelSubject) => {
       return x.channel === channel;
     }) as ChannelSubject;

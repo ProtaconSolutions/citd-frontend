@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ChannelConfig } from './channel-config';
 
 let channelConfig = new ChannelConfig();
-channelConfig.url = 'http://10.1.1.190:5000/signalr';
+channelConfig.url = 'http://localhost:5000/signalr';
 channelConfig.hubName = 'messages';
 
 /**
