@@ -16,6 +16,7 @@ export class EditorComponent implements OnInit {
   public timeLeft: number = 0;
   public playerReady: boolean = false;
   public gameOn: boolean = false;
+  public codeInput: string;
   private code$: Observable<any>;
   private players: Array<any>;
 
@@ -29,9 +30,28 @@ export class EditorComponent implements OnInit {
     this.channelService.start();
 
     this.channelService.sub('time').subscribe(
-      (event: ChannelEvent) => this.timeLeft = event.Data
+      (event: ChannelEvent) => {
+        console.log(event);
+        this.timeLeft = event.Data
+      }
     );
 
+    this.channelService.sub('compileRequest').subscribe(
+      () => {
+        let event = new ChannelEvent();
+
+        event.Data = {
+          guid: this.storage.retrieve('guid'),
+          input: this.codeInput,
+        };
+        event.Name = 'compileRequest';
+        event.ChannelName = 'compileRequest';
+
+        this.channelService.publish(event);
+      }
+    );
+
+    /*
     this.channelService.sub('nicks').subscribe(
       (event: ChannelEvent) => {
         // New player
@@ -56,6 +76,7 @@ export class EditorComponent implements OnInit {
         }
       }
     );
+    */
 
     this.code$ = this.control.valueChanges
       .debounceTime(500)

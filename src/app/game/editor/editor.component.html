@@ -1,3 +1,8 @@
+<h1>time left: {{timeLeft}}s</h1>
+
+<textarea #code [(ngModel)]="codeInput" [formControl]="control"></textarea>
+
+<!-- not used atm
 <div *ngIf="!playerReady">
     <button (click)="playerReady()">I'm playerReady!</button>
 </div>
@@ -5,7 +10,8 @@
 <div *ngIf="gameOn">
     <h1>time left: {{timeLeft}}s</h1>
 
-    <textarea #code [formControl]="control"></textarea>
+    <textarea #code [(ngModel)]="codeInput" [formControl]="control"></textarea>
 
     <hr>
 </div>
+-->
