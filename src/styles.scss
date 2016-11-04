@@ -92,3 +92,268 @@ h1 {
 #cotd-logo {
   max-height: 80px;
 }
+
+/** Latauslärvi **/
+#lataaja {
+  margin: 0 auto;
+  width: 410px;
+}
+.lataaja { list-style:none; margin:15px 0; transition:opacity .3s; }
+.lataaja li {
+  display:inline-block;
+  vertical-align:top;
+  text-align:center;
+  width:410px;
+  list-style:none;
+  margin:0 auto;
+}
+
+.heiluri {
+  animation: bobble 20s ease-in-out infinite;
+}
+
+laervi {
+  display:inline-block;
+  width:100%;
+  height:100%;
+  padding:40px 40px 60px 40px;
+  box-shadow:inset -10px -30px rgba(0,0,0,.06);
+  -moz-border-radius:100px;
+  -webkit-border-radius:100px;
+  border-radius:50%;
+  transform-origin:center bottom;
+  transition:padding 13s, bottom 13s;
+  text-align:center;
+  -webkit-animation: pyorii ease-in-out 1s infinite; /* Safari 4+ */
+}
+
+.huulet {
+  display:block;
+  height: auto;
+  width: auto;
+  background-color: #703B61;
+  margin:5px auto 0;
+  /* border-radius:10px 10px 100px 100px; */
+  border-radius:90px 90px 49% 50%;
+  overflow:hidden;
+  line-height:0;
+  transform-origin:center top;
+}
+
+
+.suu-mask {
+  -webkit-clip-path: ellipse(46% 100% at 50% 0%);
+  clip-path: ellipse(50% 101% at 50% 0%);
+  margin-top: 0px;
+}
+
+.suu {
+  display:block;
+  width:100%;
+  height:140px;
+  margin:5px auto 0;
+  background:rgba(0,0,0,.9);
+  /* border-radius:10px 10px 100px 100px; */
+  border-radius:10px 10px 50% 50%;
+  /* transition:border-radius .5s, height .5s cubic-bezier(.15,.60,.30,1.9); */
+  overflow:hidden;
+  line-height:0;
+  transform-origin:center top;
+}
+
+.alarivi {
+  margin-top: 80px;
+  position: absolute;
+}
+.ahammas {
+  width: 36px;
+  height: 60px;
+  background-color: #eeeeee;
+  float: left;
+  margin-right: 1px;
+  border-radius: 20% 20% 0px 0px;
+}
+
+.ahammas:first-child {
+  margin-left: 1px;
+}
+
+.hammas, .ahammas {
+  background: -moz-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 20%, rgba(255,255,255,1) 53%, rgba(237,237,237,1) 94%, rgba(230,230,230,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(240,240,240,1)), color-stop(20%, rgba(240,240,240,1)), color-stop(53%, rgba(255,255,255,1)), color-stop(94%, rgba(237,237,237,1)), color-stop(100%, rgba(230,230,230,1)));
+  background: -webkit-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 20%, rgba(255,255,255,1) 53%, rgba(237,237,237,1) 94%, rgba(230,230,230,1) 100%);
+  background: -o-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 20%, rgba(255,255,255,1) 53%, rgba(237,237,237,1) 94%, rgba(230,230,230,1) 100%);
+  background: -ms-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 20%, rgba(255,255,255,1) 53%, rgba(237,237,237,1) 94%, rgba(230,230,230,1) 100%);
+  background: linear-gradient(to right, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 20%, rgba(255,255,255,1) 53%, rgba(237,237,237,1) 94%, rgba(230,230,230,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#e6e6e6', GradientType=1 );
+}
+
+.hammas {
+  width: 40px;
+  height: 50px;
+  float: left;
+  margin-right: 1px;
+  border-radius:0px 0px 20% 20%;
+}
+
+.hammas:first-child {
+  margin-left: 1px;
+}
+
+@-webkit-keyframes pyorii {
+  0%, 100%   { rotate: 7deg; }
+  50%     { rotate: -7deg; }
+}
+
+@-webkit-keyframes hammas-perus {
+  0%, 100%   { height: 30px; }
+  50%     { height: 40px; }
+}
+
+@-webkit-keyframes hammas-piiloon {
+  0%, 100%   { margin-top: 84px; }
+  50%     { margin-top: 100px; }
+}
+
+@-webkit-keyframes suu-kasvaa {
+  0%, 100%   { height: 140px; }
+  50%     { height: 160px; }
+}
+
+@-webkit-keyframes huulet {
+  0%, 100%   { height: 260px; }
+  50%     { height: 280px; }
+}
+
+.hammas1 {
+  width: 20px;
+  opacity: 0.7;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite; /* IE 10+, Fx 29+ */
+}
+
+.hammas2 {
+  width: 25px;
+  opacity: 0.8;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 0.3s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 0.3s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 0.3s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 0.3s; /* IE 10+, Fx 29+ */
+}
+
+.hammas3 {
+  width: 35px;
+  opacity: 0.9;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 0.6s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 0.6s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 0.6s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 0.6s; /* IE 10+, Fx 29+ */
+}
+
+.hammas4 {
+  width: 50px;
+  -webkit-nimation: hammas-perus ease-in-out 1s infinite 0.9s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 0.9s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 0.9s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 0.9s; /* IE 10+, Fx 29+ */
+}
+
+.hammas5 {
+  width: 60px;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 1.2s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 1.2s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 1.2s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 1.2s; /* IE 10+, Fx 29+ */
+}
+.hammas6 {
+  width: 50px;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 1.5s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 1.5s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 1.5s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 1.5s; /* IE 10+, Fx 29+ */
+}
+
+.hammas7 {
+  width: 35px;
+  opacity: 0.9;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 1.8s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 1.8s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 1.8s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 1.8s; /* IE 10+, Fx 29+ */
+}
+
+.hammas8 {
+  width: 25px;
+  opacity: 0.8;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 2.1s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 2.1s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 2.1s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 2.1s; /* IE 10+, Fx 29+ */
+}
+
+.hammas9 {
+  width: 20px;
+  opacity: 0.7;
+  -webkit-animation: hammas-perus ease-in-out 1s infinite 2.4s; /* Safari 4+ */
+  -moz-animation:    hammas-perus ease-in-out 1s infinite 2.4s; /* Fx 5+ */
+  -o-animation:      hammas-perus ease-in-out 1s infinite 2.4s; /* Opera 12+ */
+  animation:         hammas-perus ease-in-out 1s infinite 2.4s; /* IE 10+, Fx 29+ */
+}
+
+.alarivi {
+  -webkit-animation: hammas-piiloon ease-in-out 1s infinite; /* Safari 4+ */
+}
+
+.suu {
+  -webkit-animation: suu-kasvaa ease-in-out 1s infinite; /* Safari 4+ */
+}
+
+.huulet { /* BJ MASTER BLASTER */
+  -webkit-animation: huulet ease-in-out 1.001s infinite; /* Safari 4+ */
+}
+
+.ahammas1, .ahammas9 {
+  opacity: 0;
+}
+
+.ahammas1 {
+  width: 20px;
+}
+
+.ahammas2 {
+  width: 25px;
+  opacity: 0.8;
+}
+
+.ahammas3 {
+  width: 35px;
+  opacity: 0.9;
+}
+
+.ahammas4 {
+  width: 50px;
+}
+
+.ahammas5 {
+  width: 60px;
+}
+
+.ahammas6 {
+  width: 50px;
+}
+
+.ahammas7 {
+  width: 35px;
+  opacity: 0.9;
+}
+
+.ahammas8 {
+  width: 25px;
+  opacity: 0.8;
+}
+
+.ahammas9 {
+  width: 20px;
+}

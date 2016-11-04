@@ -17,7 +17,7 @@ export class ResultTaskComponent implements OnInit {
     this.task = {
       name: 'test',
       players: [{
-        name: "Pete pelaja",
+        name: "Pete pelajaaa",
         status: GameStatus.InProgress,
         tests: [
           {
