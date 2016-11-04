@@ -5,6 +5,11 @@ import { LocalStorageService } from 'ng2-webstorage';
 
 import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 
+export interface ITimeData {
+  Interval: number;
+  TimeLeft: number;
+}
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -13,79 +18,34 @@ import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 
 export class EditorComponent implements OnInit {
   public control: FormControl = new FormControl();
-  public timeLeft: number = 0;
-  public playerReady: boolean = false;
-  public gameOn: boolean = false;
+  public timeLeft: any;
   public codeInput: string;
   private code$: Observable<any>;
-  private players: Array<any>;
-
 
   constructor(
     private channelService: ChannelService,
     private storage: LocalStorageService
-  ) { }
+  ) {
+    setInterval(() => { }, 1);
+  }
 
   ngOnInit() {
     this.channelService.start();
 
-    this.channelService.sub('time').subscribe(
-      (event: ChannelEvent) => {
-        console.log(event);
-        this.timeLeft = event.Data
-      }
-    );
+    this.channelService.sub('time').subscribe((event: ChannelEvent) => {
+      this.handleTimeUpdate(event.Data);
+    });
 
-    this.channelService.sub('compileRequest').subscribe(
-      () => {
-        let event = new ChannelEvent();
-
-        event.Data = {
-          guid: this.storage.retrieve('guid'),
-          input: this.codeInput,
-        };
-        event.Name = 'compileRequest';
-        event.ChannelName = 'compileRequest';
-
-        this.channelService.publish(event);
-      }
-    );
-
-    /*
-    this.channelService.sub('nicks').subscribe(
-      (event: ChannelEvent) => {
-        // New player
-        if (event.Name === 'nickEntry') {
-          this.players.push({
-            nick: event.Data.nick,
-            guid: event.Data.guid,
-            ready: false
-          });
-        }
-
-        if (event.Name === 'playerReady') {
-          this.players.map((player) => {
-            if (player.guid === event.Data.guid) {
-              player.ready = true;
-            }
-          });
-
-          if (this.players.filter((player) => player.ready).length === this.players.length) {
-            this.gameOn = true;
-          }
-        }
-      }
-    );
-    */
+    this.channelService.sub('compileRequest').subscribe(this.handleEventCompileRequest);
 
     this.code$ = this.control.valueChanges
       .debounceTime(500)
-      .do(input => {
+      .do(code => {
         let event = new ChannelEvent();
 
         event.Data = {
           guid: this.storage.retrieve('guid'),
-          input: input,
+          code: code,
         };
         event.Name = 'code';
         event.ChannelName = 'code';
@@ -96,13 +56,20 @@ export class EditorComponent implements OnInit {
     this.code$.subscribe();
   }
 
-  public ready() {
+  private handleEventCompileRequest() {
     let event = new ChannelEvent();
 
-    event.Data = this.storage.retrieve('guid');
-    event.Name = 'playerReady';
-    event.ChannelName = 'nicks';
+    event.Data = {
+      guid: this.storage.retrieve('guid'),
+      input: this.codeInput,
+    };
+    event.Name = 'compileRequest';
+    event.ChannelName = 'compileRequest';
 
     this.channelService.publish(event);
+  }
+
+  private handleTimeUpdate(data: ITimeData) {
+    this.timeLeft = data.TimeLeft;
   }
 }
