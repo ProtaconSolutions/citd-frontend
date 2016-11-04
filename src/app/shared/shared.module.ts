@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { Ng2Webstorage } from 'ng2-webstorage';
 
 import { ChannelService } from './services/';
 import { ChannelModule } from './services/channel/channel.module';
@@ -17,6 +18,7 @@ import { ChannelModule } from './services/channel/channel.module';
     HttpModule,
     RouterModule,
     ChannelModule.forRoot(),
+    Ng2Webstorage,
   ],
   providers: [
     ChannelService,
@@ -28,6 +30,7 @@ import { ChannelModule } from './services/channel/channel.module';
     HttpModule,
     RouterModule,
     ChannelModule,
+    Ng2Webstorage,
   ],
 })
 

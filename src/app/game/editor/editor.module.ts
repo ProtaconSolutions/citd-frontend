@@ -1,10 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { SharedModule } from '../../shared/shared.module';
+import { EditorGuard } from '../guards/';
+import { EditorComponent } from './index';
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule
   ],
-  declarations: []
+  declarations: [
+    EditorComponent,
+  ],
+  exports: [
+    EditorComponent,
+  ],
+  providers: [
+    EditorGuard,
+  ],
 })
+
 export class EditorModule { }
