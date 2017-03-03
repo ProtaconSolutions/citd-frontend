@@ -211,6 +211,7 @@ export class ChannelService {
    * actually emit the message, but here we're not concerned about that.
    */
   publish(event: ChannelEvent): void {
+    console.log('got channel event');
     this.hubProxy.invoke('Publish', event);
   }
 }
