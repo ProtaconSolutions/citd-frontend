@@ -22,10 +22,12 @@ export class EntryComponent implements OnInit {
 
     this.channelService.sub('nicks').subscribe(
       (event: ChannelEvent) => {
-        if (event.Name == 'login') {
+        if (event.Type === 'login') {
           this.storage.store('guid', event.Data);
 
-          this.router.navigate(['game/editor']);
+          this.router
+            .navigate(['game/editor'])
+            .then(() => {});
         }
       }
     );
@@ -34,10 +36,9 @@ export class EntryComponent implements OnInit {
   public entry() {
     this.storage.store('nick', this.nick);
 
-    let event = new ChannelEvent();
+    const event = new ChannelEvent();
 
-    event.Name = 'nickEntry';
-    event.ChannelName = 'nicks';
+    event.Type = 'nickEntry';
     event.Data = {
       nick: this.nick
     };

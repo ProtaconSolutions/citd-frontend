@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from 'ng2-webstorage';
 
 import 'rxjs/add/operator/debounceTime';
 
+import { ITimeData } from '../../models/';
 import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 import { ConnectionState } from '../../shared/services/channel/connection-state.enum';
-
-export interface ITimeData {
-  Interval: number;
-  TimeLeft: number;
-}
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-editor',
@@ -19,47 +16,36 @@ export interface ITimeData {
   styleUrls: ['./editor.component.scss']
 })
 
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
   public control: FormControl = new FormControl();
   public timeLeft: number;
   public opacity: number;
   public codeInput: string;
   private code$: Observable<any>;
+  private codeSubscription: Subscription;
 
-  constructor(
+  /**
+   * Constructor of the class.
+   *
+   * @param {ChannelService}      channelService
+   * @param {LocalStorageService} storage
+   */
+  public constructor(
     private channelService: ChannelService,
     private storage: LocalStorageService
   ) { }
 
-  ngOnInit() {
+  /**
+   * OnInit life cycle method
+   */
+  public ngOnInit(): void {
     this.channelService.start();
 
     this.channelService.connectionState$.subscribe((state: ConnectionState) => {
       console.log(`Connection state changed to: ${state}`);
 
       if (state === ConnectionState.Connected) {
-        this.channelService.sub('time').subscribe((event: ChannelEvent) => {
-          this.handleTimeUpdate(event.Data);
-        });
-
-        this.channelService.sub('compileRequest').subscribe(this.handleEventCompileRequest);
-
-        this.code$ = this.control.valueChanges
-          .debounceTime(500)
-          .do(code => {
-            const event = new ChannelEvent();
-
-            event.Data = {
-              guid: this.storage.retrieve('guid'),
-              code: code,
-            };
-            event.Name = 'code';
-            event.ChannelName = 'code';
-
-            this.channelService.publish(event);
-          });
-
-        this.code$.subscribe();
+        this.subscribeEvents();
       }
     });
 
@@ -68,24 +54,66 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  private handleEventCompileRequest() {
-    console.log('Got compileRequest message');
+  /**
+   * OnDestroy life cycle method
+   */
+  public ngOnDestroy(): void {
+    if (this.codeSubscription) {
+      this.codeSubscription.unsubscribe();
+    }
+  }
 
+  /**
+   * Method to subscribe all the needed events and create necessary subscriptions.
+   */
+  private subscribeEvents(): void {
+    // Subscribe to 'time' stream
+    this.channelService.sub('time').subscribe((event: ChannelEvent) => {
+      this.handleTimeUpdate(event.Data);
+    });
+
+    // Subscribe to 'compileNeeded' stream
+    this.channelService.sub('compileNeeded').subscribe(() => this.handleEventCompileNeeded());
+
+    this.code$ = this.control.valueChanges
+      .debounceTime(500)
+      .do(code => {
+        const event = new ChannelEvent();
+
+        event.Data = {
+          guid: this.storage.retrieve('guid'),
+          code: code,
+        };
+        event.Type = 'code';
+
+        this.channelService.publish(event);
+      });
+
+      this.codeSubscription = this.code$.subscribe();
+  }
+
+  /**
+   * Method to handle 'compileRequest' events.
+   */
+  private handleEventCompileNeeded(): void {
     const event = new ChannelEvent();
 
     event.Data = {
       guid: this.storage.retrieve('guid'),
       input: this.codeInput,
     };
-    event.Name = 'compileRequest';
-    event.ChannelName = 'compileRequest';
+    event.Type = 'compileRequest';
+    event.ConnectionId = 'compileRequest';
 
     this.channelService.publish(event);
   }
 
-  private handleTimeUpdate(data: ITimeData) {
-    console.log('Got time message', data);
-
+  /**
+   * Method to handle time updates from server.
+   *
+   * @param {ITimeData} data
+   */
+  private handleTimeUpdate(data: ITimeData): void {
     // Reset player input when times is up...
     if (data.TimeLeft === data.Interval) {
       this.codeInput = '';

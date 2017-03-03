@@ -45,6 +45,8 @@ export class ChannelService {
   private hubConnection: any;
   private hubProxy: any;
 
+  private connectionState: ConnectionState;
+
   // An internal array to track what channel subscriptions exist
   private subjects: Array<ChannelSubject> = [];
 
@@ -83,6 +85,8 @@ export class ChannelService {
           newState = ConnectionState.Disconnected;
           break;
       }
+
+      this.connectionState = newState;
 
       // Push the new state on our subject
       this.connectionStateSubject.next(newState);
@@ -129,7 +133,7 @@ export class ChannelService {
      * if the startup sequence is done.
      *
      * If we just mapped the start() promise to an observable, then any time
-     * a client subscried to it the start sequence would be triggered
+     * a client subscribed to it the start sequence would be triggered
      * again since it's a cold observable.
      */
     this.hubConnection.start()
