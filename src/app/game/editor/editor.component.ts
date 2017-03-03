@@ -84,7 +84,7 @@ export class EditorComponent implements OnInit, OnDestroy {
           guid: this.storage.retrieve('guid'),
           code: code,
         };
-        event.Type = 'code';
+        event.Name = 'code';
 
         this.channelService.publish(event);
       });
@@ -102,8 +102,8 @@ export class EditorComponent implements OnInit, OnDestroy {
       guid: this.storage.retrieve('guid'),
       input: this.codeInput,
     };
-    event.Type = 'compileRequest';
-    event.ConnectionId = 'compileRequest';
+    event.Name = 'compileRequest';
+    event.ChannelName = 'compileRequest';
 
     this.channelService.publish(event);
   }

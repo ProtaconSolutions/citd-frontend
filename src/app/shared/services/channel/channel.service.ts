@@ -6,6 +6,7 @@ import { ConnectionState } from './connection-state.enum';
 import { ChannelEvent } from './channel-event';
 import { ChannelSubject } from './channel-subject';
 import { Config } from '../../../config/config';
+import { LocalStorageService } from 'ng2-webstorage';
 
 declare var $;
 
@@ -50,7 +51,10 @@ export class ChannelService {
   // An internal array to track what channel subscriptions exist
   private subjects: Array<ChannelSubject> = [];
 
-  constructor(private ngZone: NgZone) {
+  constructor(
+    private ngZone: NgZone,
+    private storage: LocalStorageService
+  ) {
     if ($ === undefined || $.hubConnection === undefined) {
       const message = `The variable '$' or the .hubConnection() function are not defined...\
        please check the SignalR scripts have been loaded properly`;
@@ -137,7 +141,9 @@ export class ChannelService {
      * again since it's a cold observable.
      */
     this.hubConnection.start()
-      .done(() => {
+      .done((data) => {
+        this.storage.store('guid', data.id);
+
         this.startingSubject.next();
       })
       .fail((error: any) => {

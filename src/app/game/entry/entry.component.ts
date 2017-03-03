@@ -22,7 +22,7 @@ export class EntryComponent implements OnInit {
 
     this.channelService.sub('nicks').subscribe(
       (event: ChannelEvent) => {
-        if (event.Type === 'login') {
+        if (event.Name === 'login') {
           this.storage.store('guid', event.Data);
 
           this.router
@@ -38,7 +38,7 @@ export class EntryComponent implements OnInit {
 
     const event = new ChannelEvent();
 
-    event.Type = 'nickEntry';
+    event.Name = 'nickEntry';
     event.Data = {
       nick: this.nick
     };

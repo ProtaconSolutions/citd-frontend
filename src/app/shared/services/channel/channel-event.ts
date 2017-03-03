@@ -1,5 +1,11 @@
 export class ChannelEvent {
-  Type: string;
-  ConnectionId: string;
+  Name: string;
+  ChannelName: string;
+  Timestamp: Date;
   Data: any;
+  Json: string;
+
+  constructor() {
+    this.Timestamp = new Date();
+  }
 }
