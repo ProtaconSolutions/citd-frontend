@@ -67,7 +67,7 @@ export class EditorComponent implements OnInit {
   }
 
   private handleEventCompileRequest() {
-    console.info('Got compileRequest message', data);
+    console.info('Got compileRequest message');
 
     let event = new ChannelEvent();
 
