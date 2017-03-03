@@ -6,6 +6,7 @@ import { TaskService } from './task/task.service';
 export * from './channel/'
 export * from './task/'
 export * from './message.service';
+export * from './window-ref';
 
 export const Services = [
   MessageService,

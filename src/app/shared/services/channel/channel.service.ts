@@ -1,12 +1,13 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+
 import { ConnectionState } from './connection-state.enum';
 import { ChannelEvent } from './channel-event';
 import { ChannelSubject } from './channel-subject';
 import { Config } from '../../../config/config';
 
-export let $;
+declare var $;
 
 /**
  * ChannelService is a wrapper around the functionality that SignalR
@@ -17,7 +18,7 @@ export let $;
 @Injectable()
 export class ChannelService {
   /**
-   * starting$ is an observable available to know if the signalr
+   * starting$ is an observable available to know if the signalR
    * connection is ready or not. On a successful connection this
    * stream will emit a value.
    */
@@ -137,8 +138,7 @@ export class ChannelService {
       })
       .fail((error: any) => {
         this.startingSubject.error(error);
-      })
-    ;
+      });
   }
 
   /**
@@ -207,7 +207,7 @@ export class ChannelService {
   // }
 
   /**
-   * publish provides a way for calles to emit events on any channel. In a
+   * publish provides a way for callers to emit events on any channel. In a
    * production app the server would ensure that only authorized clients can
    * actually emit the message, but here we're not concerned about that.
    */

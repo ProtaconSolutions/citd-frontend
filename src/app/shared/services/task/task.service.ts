@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { ChannelService } from "../channel/channel.service";
-import { Observable } from "rxjs";
-import { ChannelEvent } from "../channel/channel-event";
+import { Injectable } from '@angular/core';
+import { ChannelService } from '../channel/channel.service';
+import { Observable } from 'rxjs/Observable';
+import { ChannelEvent } from '../channel/channel-event';
 
 export interface IPlayer {
   name: string;
@@ -27,9 +27,7 @@ export interface ITask {
 
 @Injectable()
 export class TaskService {
-  constructor(
-    private channelService: ChannelService
-  ) {
+  constructor(private channelService: ChannelService) {
     this.channelService.start();
   }
 
