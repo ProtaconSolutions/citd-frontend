@@ -1,0 +1,11 @@
+import { ChannelConfig } from '../shared/services/channel/channel-config';
+
+export const API: ChannelConfig = {
+  url: 'http://localhost:5000/signalr',
+  hubName: 'messaging',
+  channel: '',
+};
+
+export class Config {
+  public static ChannelConfig = API;
+}

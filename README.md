@@ -27,6 +27,10 @@ be found [here](https://github.com/joyent/node/wiki/Installing-Node.js-via-packa
 
 Also note that ```node.js 6+``` is required.
 
+### Configuration
+See ```/src/app/config/config.ts_example``` file and copy it to ```/src/app/config/config.ts``` file and make
+necessary changes to it. 
+
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 

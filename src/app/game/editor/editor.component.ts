@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from 'ng2-webstorage';
+
+import 'rxjs/add/operator/debounceTime';
 
 import { ChannelService, ChannelEvent } from '../../shared/services/channel';
 import { ConnectionState } from '../../shared/services/channel/connection-state.enum';
@@ -33,7 +35,7 @@ export class EditorComponent implements OnInit {
     this.channelService.start();
 
     this.channelService.connectionState$.subscribe((state: ConnectionState) => {
-      console.info(`Connection state changed to: ${state}`);
+      console.log(`Connection state changed to: ${state}`);
 
       if (state === ConnectionState.Connected) {
         this.channelService.sub('time').subscribe((event: ChannelEvent) => {
@@ -45,7 +47,7 @@ export class EditorComponent implements OnInit {
         this.code$ = this.control.valueChanges
           .debounceTime(500)
           .do(code => {
-            let event = new ChannelEvent();
+            const event = new ChannelEvent();
 
             event.Data = {
               guid: this.storage.retrieve('guid'),
@@ -67,9 +69,9 @@ export class EditorComponent implements OnInit {
   }
 
   private handleEventCompileRequest() {
-    console.info('Got compileRequest message');
+    console.log('Got compileRequest message');
 
-    let event = new ChannelEvent();
+    const event = new ChannelEvent();
 
     event.Data = {
       guid: this.storage.retrieve('guid'),
@@ -82,7 +84,7 @@ export class EditorComponent implements OnInit {
   }
 
   private handleTimeUpdate(data: ITimeData) {
-    console.info('Got time message', data);
+    console.log('Got time message', data);
 
     // Reset player input when times is up...
     if (data.TimeLeft === data.Interval) {

@@ -1,11 +1,12 @@
-import { Injectable, Inject, NgZone } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { ConnectionState } from './connection-state.enum';
-import { ChannelConfig } from './channel-config';
 import { ChannelEvent } from './channel-event';
 import { ChannelSubject } from './channel-subject';
+import { Config } from '../../../config/config';
 
-declare var $;
+export let $;
 
 /**
  * ChannelService is a wrapper around the functionality that SignalR
@@ -20,19 +21,19 @@ export class ChannelService {
    * connection is ready or not. On a successful connection this
    * stream will emit a value.
    */
-  starting$: Observable<any>;
+  public starting$: Observable<any>;
 
   /**
    * connectionState$ provides the current state of the underlying
    * connection as an observable stream.
    */
-  connectionState$: Observable<ConnectionState>;
+  public connectionState$: Observable<ConnectionState>;
 
   /**
    * error$ provides a stream of any error messages that occur on the
    * SignalR connection
    */
-  error$: Observable<string>;
+  public error$: Observable<string>;
 
   // These are used to feed the public observables
   private connectionStateSubject = new Subject<ConnectionState>();
@@ -44,14 +45,14 @@ export class ChannelService {
   private hubProxy: any;
 
   // An internal array to track what channel subscriptions exist
-  private subjects = new Array<ChannelSubject>();
+  private subjects: Array<ChannelSubject> = [];
 
-  constructor(
-    @Inject('channel.config') private channelConfig: ChannelConfig,
-    private ngZone: NgZone
-  ) {
-    if ($ === undefined || $.hubConnection === undefined) {
-      throw new Error('The variable \'$\' or the .hubConnection() function are not defined... please check the SignalR scripts have been loaded properly');
+  constructor(private ngZone: NgZone) {
+    if ($ === undefined || $.hubConnection === undefined) {
+      const message = `The variable '$' or the .hubConnection() function are not defined...\
+       please check the SignalR scripts have been loaded properly`;
+
+      throw new Error(message);
     }
 
     // Set up our observables
@@ -60,8 +61,8 @@ export class ChannelService {
     this.starting$ = this.startingSubject.asObservable();
 
     this.hubConnection = $.hubConnection();
-    this.hubConnection.url = channelConfig.url;
-    this.hubProxy = this.hubConnection.createHubProxy(channelConfig.hubName);
+    this.hubConnection.url = Config.ChannelConfig.url;
+    this.hubProxy = this.hubConnection.createHubProxy(Config.ChannelConfig.hubName);
 
     // Define handlers for the connection state events
     this.hubConnection.stateChanged((state: any) => {
@@ -103,7 +104,7 @@ export class ChannelService {
          * for the channel this came in on, and then emit the event
          * on it. Otherwise we ignore the message.
          */
-        let channelSub = this.subjects.find((x: ChannelSubject) => {
+        const channelSub = this.subjects.find((x: ChannelSubject) => {
           return x.channel === channel;
         }) as ChannelSubject;
 
@@ -211,7 +212,7 @@ export class ChannelService {
    * actually emit the message, but here we're not concerned about that.
    */
   publish(event: ChannelEvent): void {
-    console.log('got channel event');
+    console.log('got publish event', event);
     this.hubProxy.invoke('Publish', event);
   }
 }

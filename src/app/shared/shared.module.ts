@@ -13,7 +13,7 @@ import 'hammerjs';
 
 import { Directives } from './directives/';
 import { Services } from './services/';
-import { ChannelModule } from './services/channel/channel.module';
+//import { ChannelModule } from './services/channel/channel.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ChannelModule } from './services/channel/channel.module';
     FlexLayoutModule,
     MomentModule,
     Ng2Webstorage,
-    ChannelModule.forRoot(),
+   // ChannelModule.forRoot(),
   ],
   providers: [
     MdIconRegistry,
@@ -47,7 +47,7 @@ import { ChannelModule } from './services/channel/channel.module';
     FlexLayoutModule,
     MomentModule,
     Ng2Webstorage,
-    ChannelModule,
+   // ChannelModule,
     ...Directives,
   ],
 })
