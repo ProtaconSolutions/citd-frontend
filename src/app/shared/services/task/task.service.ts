@@ -1,5 +1,5 @@
-import { ChannelService } from "../channel/channel.service";
 import { Injectable } from "@angular/core";
+import { ChannelService } from "../channel/channel.service";
 import { Observable } from "rxjs";
 import { ChannelEvent } from "../channel/channel-event";
 
@@ -36,5 +36,4 @@ export class TaskService {
   getTasks(): Observable<ChannelEvent> {
     return this.channelService.sub('tasks');
   }
-
 }

@@ -1,2 +1,2 @@
 export * from './editor.component';
-export * from './editor.routing';
+export * from './editor.routes';

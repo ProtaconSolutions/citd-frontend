@@ -25,43 +25,38 @@ todo...
 First of all you have to install `npm` and `node.js` to your box. Installation instructions can
 be found [here](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager). 
 
-Also note that ```node.js 6.x``` is required.
+Also note that ```node.js 6+``` is required.
 
-## Development
-To start developing in the project run:
+## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-```bash
-npm start
-``` 
-OR
-```bash
-ng serve
-```
+## Code scaffolding
 
-Then head to `http://localhost:4200` in your browser.
-
-## Tests
-
-### Unit tests
-To run tests run:
-```bash
-ng test
-```
-
-### e2e tests
-To run tests run:
-```bash
-ng e2e
-```
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
 ## Build
+
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
 ## Authors
- * [Protacon Solutions](http://www.protacon.com)
+ * [Protacon Solutions](http://www.protacon.com/)
  * [Tarmo Leppänen](https://github.com/tarlepp)
 
 ## License
 [The MIT License (MIT)](LICENSE)
 
-Copyright (c) 2016 Protacon Solutions
+Copyright (c) 2017 Protacon Solutions
+

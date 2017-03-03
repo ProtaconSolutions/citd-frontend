@@ -1,4 +1,13 @@
-<article class="content-container">
-  <router-outlet></router-outlet>
-  {{data}}
+<header>
+  <router-outlet name="header"></router-outlet>
+</header>
+
+<article fxFlex>
+  <section>
+    <router-outlet fxFlex></router-outlet>
+  </section>
 </article>
+
+<footer>
+  <router-outlet name="footer"></router-outlet>
+</footer>

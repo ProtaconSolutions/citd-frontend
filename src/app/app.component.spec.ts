@@ -1,39 +1,27 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { APP_BASE_HREF } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 
-describe('App: CitD Frontend', () => {
-  let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+describe('AppComponent', () => {
+  beforeEach(() => {
+    return TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
+        AppComponent
       ],
-      imports: [
-        RouterModule.forRoot([]),
-      ],
-      providers: [
-        {
-          provide: APP_BASE_HREF,
-          useValue : '/',
-        },
-      ]
-    })
-    .compileComponents();
+    });
+    TestBed.compileComponents();
+  });
+
+  it('should create the app', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+
+    expect(app).toBeTruthy();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
-
-    fixture.detectChanges();
-  });
-
-  it('should create application component', () => {
-    expect(component).toBeTruthy();
-  });
+  it(`should have as title 'app works!'`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('Code in the Dark');
+  }));
 });

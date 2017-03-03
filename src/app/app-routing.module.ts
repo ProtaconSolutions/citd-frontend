@@ -1,19 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ExampleRoutes } from './example/';
-import { GameRoutes } from "./game/";
-import { ResultRoutes } from "./result/result.routing";
-
 const appRoutes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'example',
+    redirectTo: 'about',
   },
-  ...ExampleRoutes,
-  ...GameRoutes,
-  ...ResultRoutes,
 ];
 
 @NgModule({

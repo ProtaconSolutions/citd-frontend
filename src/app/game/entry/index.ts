@@ -1,2 +1,2 @@
 export * from './entry.component';
-export * from './entry.routing';
+export * from './entry.routes';

@@ -1,10 +1,10 @@
-import { CitdFrontendPage } from './app.po';
+import { FoobarPage } from './app.po';
 
-describe('citd-frontend App', function() {
-  let page: CitdFrontendPage;
+describe('foobar App', () => {
+  let page: FoobarPage;
 
   beforeEach(() => {
-    page = new CitdFrontendPage();
+    page = new FoobarPage();
   });
 
   it('should display message saying app works', () => {

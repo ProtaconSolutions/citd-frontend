@@ -1,9 +1,21 @@
-.content-container {
+header {
+  order: 1;
+  flex-shrink: 0;
+}
+
+article {
+  flex: 1;
+  order: 2;
+  overflow: auto;
+  width: 85%;
   margin: 0 auto;
-  width: 80%;
-  background: #FFFFFF;
-  font-family: Arial;
-  padding: 40px;
-  color: #000000;
-  font-size: 18px;
+
+  section {
+    background-color: #fff;
+  }
+}
+
+footer {
+  order: 3;
+  flex-shrink: 0;
 }

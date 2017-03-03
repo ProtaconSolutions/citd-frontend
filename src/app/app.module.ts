@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { ExampleModule } from './example/example.module';
+import { LayoutModule } from './layout/layout.module';
+import { AboutModule } from './about/about.module';
 import { GameModule } from './game/game.module';
-import { ResultModule } from "./result/result.module";
 
 @NgModule({
   declarations: [
@@ -14,9 +14,9 @@ import { ResultModule } from "./result/result.module";
   imports: [
     AppRoutingModule,
     SharedModule,
-    ExampleModule,
+    LayoutModule,
+    AboutModule,
     GameModule,
-    ResultModule
   ],
   bootstrap: [
     AppComponent,

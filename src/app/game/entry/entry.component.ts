@@ -8,7 +8,7 @@ import { ChannelEvent, ChannelService } from '../../shared/services/channel/';
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss']
 })
-export class EntryComponent {
+export class EntryComponent implements OnInit {
   public nick: string;
 
   constructor(
