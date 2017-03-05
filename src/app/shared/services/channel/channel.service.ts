@@ -45,13 +45,18 @@ export class ChannelService {
   // These are used to track the internal SignalR state
   private hubConnection: any;
   private hubProxy: any;
-
   private connectionState: ConnectionState;
 
   // An internal array to track what channel subscriptions exist
   private subjects: Array<ChannelSubject> = [];
 
-  constructor(
+  /**
+   * Constructor of the class.
+   *
+   * @param {NgZone}              ngZone
+   * @param {LocalStorageService} storage
+   */
+  public constructor(
     private ngZone: NgZone,
     private storage: LocalStorageService
   ) {
@@ -62,11 +67,14 @@ export class ChannelService {
       throw new Error(message);
     }
 
+    console.log('ddd');
+
     // Set up our observables
     this.connectionState$ = this.connectionStateSubject.asObservable();
     this.error$ = this.errorSubject.asObservable();
     this.starting$ = this.startingSubject.asObservable();
 
+    // Create hub connection and proxy
     this.hubConnection = $.hubConnection();
     this.hubConnection.url = Config.ChannelConfig.url;
     this.hubProxy = this.hubConnection.createHubProxy(Config.ChannelConfig.hubName);
@@ -130,7 +138,7 @@ export class ChannelService {
    * event if the connection is established, otherwise it will emit an
    * error.
    */
-  start(): void {
+  public start(): void {
     /**
      * Now we only want the connection started once, so we have a special
      * starting$ observable that clients can subscribe to know know if
@@ -155,7 +163,7 @@ export class ChannelService {
    * Get an observable that will contain the data associated with a specific
    * channel
    */
-  sub(channel: string): Observable<ChannelEvent> {
+  public sub(channel: string): Observable<ChannelEvent> {
     // Try to find an observable that we already created for the requested channel
     //noinspection TypeScriptUnresolvedFunction
     let channelSub = this.subjects.find((x: ChannelSubject) => {
@@ -221,8 +229,9 @@ export class ChannelService {
    * production app the server would ensure that only authorized clients can
    * actually emit the message, but here we're not concerned about that.
    */
-  publish(event: ChannelEvent): void {
-    console.log('got publish event', event);
+  public publish(event: ChannelEvent): void {
+    console.log('Publish event frontend -> backend', event);
+
     this.hubProxy.invoke('Publish', event);
   }
 }

@@ -39,11 +39,7 @@ export class EditorComponent implements OnInit, OnDestroy {
    * OnInit life cycle method
    */
   public ngOnInit(): void {
-    this.channelService.start();
-
     this.channelService.connectionState$.subscribe((state: ConnectionState) => {
-      console.log(`Connection state changed to: ${state}`);
-
       if (state === ConnectionState.Connected) {
         this.subscribeEvents();
       }

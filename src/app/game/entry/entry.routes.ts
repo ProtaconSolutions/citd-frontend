@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { EntryComponent } from './entry.component';
-import { EntryGuard } from "../guards/";
+import { EntryGuard } from '../guards/';
 
 export const EntryRoutes: Routes = [
   {

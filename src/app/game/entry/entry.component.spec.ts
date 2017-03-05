@@ -1,12 +1,9 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { EntryComponent } from './entry.component';
-import {Ng2Webstorage, LocalStorageService} from "ng2-webstorage";
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+import { Ng2Webstorage, LocalStorageService } from 'ng2-webstorage';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 describe('/src/app/game/entry/entry.component.ts', () => {
   let component: EntryComponent;
@@ -22,8 +19,9 @@ describe('/src/app/game/entry/entry.component.ts', () => {
     };
 
     TestBed.configureTestingModule({
-
-      declarations: [ EntryComponent ],
+      declarations: [
+        EntryComponent,
+      ],
       imports: [
         FormsModule,
         Ng2Webstorage,
@@ -39,7 +37,8 @@ describe('/src/app/game/entry/entry.component.ts', () => {
         },
       ]
     })
-    .compileComponents();
+    .compileComponents()
+    .then(() => { });
   }));
 
   beforeEach(() => {

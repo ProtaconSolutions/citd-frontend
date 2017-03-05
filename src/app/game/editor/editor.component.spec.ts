@@ -13,7 +13,8 @@ describe('/src/app/game/editor/editor.component.ts', () => {
     TestBed.configureTestingModule({
       declarations: [ EditorComponent ]
     })
-    .compileComponents();
+    .compileComponents()
+    .then(() => {});
   }));
 
   beforeEach(() => {
